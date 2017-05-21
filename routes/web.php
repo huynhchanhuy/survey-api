@@ -11,20 +11,19 @@
 |
 */
 
-// $api = app('Dingo\Api\Routing\Router');
+// $app->get('/', function () use ($app) {
+//     return $app->version();
+// });
+
+$api = app('Dingo\Api\Routing\Router');
 
 // $api->version('v1', function ($api) {
-// 	// $api->get('users/{id}', 'App\Api\V1\Controllers\UserController@show');
 // 	$api->get('test', function () {
 //         return 'It is ok';
 //     });
 // });
 
-// $app->get('/', function () use ($app) {
-//     return $app->version();
-// });
 
-$api = $app->make('Dingo\Api\Routing\Router');
 // $api->version(['v1'], function ($api) use ($app) {
 //     $api->get('test', function () use ($app, $api) {
 //         return [
@@ -50,16 +49,8 @@ $api->group([
 ], function($api) use ($app)
 {
     $api->get('/', function () use ($app, $api) {
-        return [
-            'message' => $app->version(),
-            'status' => 200,
-        ];
+        return $app->version();
     });
 
-    // $api->get('collections/{collection}', function(){
-    //     return 'test';
-    // });
-    // $api->get('users', 'UserController@index');
-    // $api->get('users/{id}', 'UserController@show');
     $api->get('collections/{collection}', 'CollectionsController@show');
 });

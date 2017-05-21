@@ -9,7 +9,6 @@ class CollectionTest extends TestCase
     {
 
         $response = $this->client->get('/collections/travel');
-
         $this->assertEquals(
             self::HTTP_OK,
             $response->getStatusCode()
@@ -25,7 +24,6 @@ class CollectionTest extends TestCase
         ];
 
         $this->assertValidArray($expected, $this->getResponseArray($response)['data'][0]);
-
         // $this->markTestIncomplete('add expected return data.');
     }
 

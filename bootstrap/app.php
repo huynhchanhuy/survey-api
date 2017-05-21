@@ -96,6 +96,7 @@ $app['Dingo\Api\Exception\Handler']->setErrorFormat([
     ]
 ]);
 
+$app->withFacades();
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes
