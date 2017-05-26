@@ -9,6 +9,9 @@ use Illuminate\Database\Eloquent\Model;
 class Collection extends Model
 {
     //use SoftDeletes;
+    protected $table = 'collections';
+    protected $primaryKey = 'id';
+
     /**
      * Indicates if the model should be timestamped.
      *

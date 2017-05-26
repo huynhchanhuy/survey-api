@@ -23,7 +23,7 @@ $app = new Laravel\Lumen\Application(
     realpath(__DIR__.'/../')
 );
 
-// $app->withFacades();
+$app->withFacades();
 
 $app->withEloquent();
 
@@ -82,7 +82,6 @@ $app->singleton(
 // $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
 
-
 # Dingo API
 $app->register(Widnyana\LDRoutesList\CommandServiceProvider::class);
 $app->register(Dingo\Api\Provider\LumenServiceProvider::class);
@@ -96,7 +95,15 @@ $app['Dingo\Api\Exception\Handler']->setErrorFormat([
     ]
 ]);
 
-$app->withFacades();
+// set up default serializer
+$app['Dingo\Api\Transformer\Factory']->setAdapter(function ($app) {
+    $fractal = new League\Fractal\Manager;
+    $serializer = new \League\Fractal\Serializer\JsonApiSerializer($_ENV['API_DOMAIN']);
+    $fractal->setSerializer($serializer);
+    // return a new Fractal instance
+    return new Dingo\Api\Transformer\Adapter\Fractal($fractal, 'include', ',', true);
+});
+
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes

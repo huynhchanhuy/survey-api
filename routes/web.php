@@ -51,6 +51,6 @@ $api->group([
     $api->get('/', function () use ($app, $api) {
         return $app->version();
     });
-
+    $api->get('collections/', 			  'CollectionsController@index');
     $api->get('collections/{collection}', 'CollectionsController@show');
 });
